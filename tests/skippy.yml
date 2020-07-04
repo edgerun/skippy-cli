@@ -1,0 +1,8 @@
+data:
+  consume:
+    - myconsume1:myfile1
+    - myconsume2:myfile2
+  produce:
+    - myproduce1:myfile1
+policy:
+  capability: gpu

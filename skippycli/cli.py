@@ -1,6 +1,7 @@
 import logging
-
 import click
+
+from skippycli.commands.deploy import deploy_openfaas
 
 
 @click.group()
@@ -12,8 +13,11 @@ def skippy(debug):
 
 
 @skippy.command()
-def build():
-    print('creating skippy.yaml')
+@click.argument('args', nargs=-1)
+def deploy(args):
+    logging.debug('reading skippy.yml')
+    logging.debug('arguments %s' % " ".join(args))
+    deploy_openfaas(args, "../tests/skippy.yml")
 
 
 def main(*args, **kwargs):
