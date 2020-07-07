@@ -17,7 +17,7 @@ def skippy(debug):
 def deploy(args):
     logging.debug('reading skippy.yml')
     logging.debug('arguments %s' % " ".join(args))
-    deploy_openfaas(args, "../tests/skippy.yml")
+    deploy_openfaas(args[0], "skippy.yml")
 
 
 def main(*args, **kwargs):
