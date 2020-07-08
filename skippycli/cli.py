@@ -14,10 +14,11 @@ def skippy(debug):
 
 @skippy.command()
 @click.argument('args', nargs=-1)
-def deploy(args):
+@click.option('--config', default='skippy.yml')
+def deploy(args, config):
     logging.debug('reading skippy.yml')
     logging.debug('arguments %s' % " ".join(args))
-    deploy_openfaas(args[0], "skippy.yml")
+    deploy_openfaas(args[0], config)
 
 
 def main(*args, **kwargs):

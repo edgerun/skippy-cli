@@ -20,28 +20,29 @@ def parse_yaml(config_file: str = None):
         return yaml.safe_load(f)
 
 
-def read_skippy_labels(config_file: str = None) -> Set[str]:
+def read_skippy_labels(config_file: str = None):
     config = parse_yaml(config_file)
-    skippy_labels = set()
-    skippy_labels.add(extract_label(_consume_label, config))
-    skippy_labels.add(extract_label(_produce_label, config))
-    skippy_labels.add(extract_label(_capability_label, config))
+    skippy_labels = list()
+    skippy_labels.extend(extract_label(_consume_label, config))
+    skippy_labels.extend(extract_label(_produce_label, config))
+    skippy_labels.extend(extract_label(_capability_label, config))
     logging.info('Skippy labels %s' % skippy_labels)
     return skippy_labels
 
 
-def extract_label(label_suffix: str, data) -> Set[str]:
+def extract_label(label_suffix: str, data):
     label_arr = label_suffix.split('.')
     value = data[label_arr[0]][label_arr[1]]
-    labels= set()
+    labels = list()
     if isinstance(value, list):
         # label_value = "[{}]".format(','.join(value))
         for v in value:
-            print()
-
+            labels.append("{}{}.{}={}".format(_skippy_prefix, label_suffix, value.index(v), v))
     else:
         label_value = value
-    return "{}{}={}".format(_skippy_prefix, label_suffix, label_value)
+        labels.append("{}{}={}".format(_skippy_prefix, label_suffix, label_value))
+    logging.debug('labels %s' % labels)
+    return labels
 
 
 def deploy_openfaas(deploy_cmd: str, config_file: str = None) -> None:
