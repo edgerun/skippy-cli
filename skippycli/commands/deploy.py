@@ -45,7 +45,8 @@ def extract_label(label_suffix: str, data):
 def deploy_openfaas(deploy_cmd: str, config_file: str = None) -> None:
     skippy_config_path = build_skippy_config_path(deploy_cmd, config_file)
     labels = read_skippy_labels(skippy_config_path)
-    cmd = _faas_cli_deploy + deploy_cmd + ' --label ' + ' --label '.join(labels)
+    cmd = _faas_cli_deploy + deploy_cmd
+    cmd= cmd + ' --label ' + ' --label '.join(labels) if len(labels) > 0 else cmd
     logging.debug('cmd %s' % cmd)
     subprocess.run(cmd, shell=True, check=True)
 

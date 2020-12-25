@@ -32,6 +32,10 @@ accepted labels:
     policy:
       capability: gpu
      
+
+openfaas limitations : labels must consist of alphanumeric characters, '-', '_' and must start and end with an alphanumeric character
+skippy: '.' should be only used for bucket.file.txt delimitation and extension. File extension must be present. 
+
 Deploy 
 
     skippy deploy <openfaas-function-yaml>
