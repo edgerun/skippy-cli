@@ -5,8 +5,7 @@ import subprocess
 import re
 
 # TODO remove
-_config_file = '../tests/skippy.yml'
-_skippy_prefix = 'io.skippy.'
+_skippy_prefix = 'skippy.io.'
 _consume_label = 'data.consume'
 _produce_label = 'data.produce'
 _capability_label = 'policy.capability'
@@ -14,8 +13,6 @@ _faas_cli_deploy = 'faas-cli deploy -f '
 
 
 def parse_yaml(config_file: str = None):
-    if not config_file:
-        config_file = _config_file
     with open(config_file) as f:
         return yaml.safe_load(f)
 
