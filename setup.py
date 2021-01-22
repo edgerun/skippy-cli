@@ -22,9 +22,9 @@ except FileNotFoundError:
 
 setuptools.setup(
     name="skippy-cli",
-    version="0.0.1.dev2",
-    author="Thomas Rausch",
-    author_email="t.rausch@dsg.tuwien.ac.at",
+    version="0.0.1.dev3",
+    author="Thomas Rausch Cynthia Marcelino",
+    author_email="t.rausch@dsg.tuwien.ac.at keniack@gmail.com",
     description="Skippy Command Line Interface",
     long_description=long_description,
     long_description_content_type="text/markdown",

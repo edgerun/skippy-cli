@@ -5,8 +5,7 @@ import subprocess
 import re
 
 # TODO remove
-_config_file = '../tests/skippy.yml'
-_skippy_prefix = 'io.skippy.'
+_skippy_prefix = 'skippy.io.'
 _consume_label = 'data.consume'
 _produce_label = 'data.produce'
 _chain_label = 'chain.function'
@@ -15,8 +14,6 @@ _faas_cli_deploy = 'faas-cli deploy -f '
 
 
 def parse_yaml(config_file: str = None):
-    if not config_file:
-        config_file = _config_file
     with open(config_file) as f:
         return yaml.safe_load(f)
 
@@ -50,7 +47,8 @@ def extract_label(label_suffix: str, data):
 def deploy_openfaas(deploy_cmd: str, config_file: str = None) -> None:
     skippy_config_path = build_skippy_config_path(deploy_cmd, config_file)
     labels = read_skippy_labels(skippy_config_path)
-    cmd = _faas_cli_deploy + deploy_cmd + ' --label ' + ' --label '.join(labels)
+    cmd = _faas_cli_deploy + deploy_cmd
+    cmd= cmd + ' --label ' + ' --label '.join(labels) if len(labels) > 0 else cmd
     logging.debug('cmd %s' % cmd)
     subprocess.run(cmd, shell=True, check=True)
 
