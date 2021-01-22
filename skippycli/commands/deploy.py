@@ -9,6 +9,7 @@ _config_file = '../tests/skippy.yml'
 _skippy_prefix = 'io.skippy.'
 _consume_label = 'data.consume'
 _produce_label = 'data.produce'
+_chain_label = 'chain.function'
 _capability_label = 'policy.capability'
 _faas_cli_deploy = 'faas-cli deploy -f '
 
@@ -25,6 +26,7 @@ def read_skippy_labels(config_file: str = None):
     skippy_labels = list()
     skippy_labels.extend(extract_label(_consume_label, config))
     skippy_labels.extend(extract_label(_produce_label, config))
+    skippy_labels.extend(extract_label(_chain_label, config))
     skippy_labels.extend(extract_label(_capability_label, config))
     logging.info('Skippy labels %s' % skippy_labels)
     return skippy_labels

@@ -4,5 +4,7 @@ data:
     - myconsume2.myfile2
   produce:
     - myproduce1.myfile1
+chain:
+  function: testchain1
 policy:
   capability: gpu
